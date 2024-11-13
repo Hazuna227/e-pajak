@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bantuan - e-Pajak</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reset beberapa gaya default */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Gaya untuk body halaman */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #2a7ae2, #6fa3f8);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100%;
+            margin: 0;
+            padding-top: 30px;
+        }
+
+        /* Kontainer utama */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+            max-width: 1000px;
+            padding: 0 20px;
+            flex-direction: column;
+        }
+
+        /* Kotak bantuan */
+        .help-box {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 900px;
+            margin-top: 50px;
+        }
+
+        /* Judul */
+        .help-box h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #2a7ae2;
+        }
+
+        /* Daftar panduan */
+        .help-box ul {
+            margin-top: 20px;
+            list-style: none;
+        }
+
+        .help-box li {
+            margin-bottom: 15px;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .help-box li strong {
+            font-weight: bold;
+        }
+
+        /* Ikon Bantuan */
+        .help-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 36px;
+            color: #2a7ae2;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .help-icon:hover {
+            color: #1a5db8;
+        }
+
+        /* Link Kembali */
+        .back-link {
+            margin-top: 20px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .back-link a {
+            text-decoration: none;
+            color: #2a7ae2;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="help-box">
+            <h2>Halaman Bantuan</h2>
+
+            <h3>1. Panduan Login</h3>
+            <ul>
+                <li><strong>Masuk ke Akun:</strong> Masukkan nama pengguna dan kata sandi yang terdaftar untuk masuk ke
+                    akun Anda.</li>
+                <li><strong>Pesan Kesalahan:</strong> Jika Anda melihat pesan "Nama pengguna atau kata sandi salah,"
+                    pastikan Anda memasukkan informasi dengan benar. Jika masalah berlanjut, coba reset kata sandi Anda.
+                </li>
+                <li><strong>Akun Terkunci:</strong> Jika akun Anda terkunci setelah beberapa kali percobaan login yang
+                    gagal, coba gunakan fitur "Lupa Kata Sandi" untuk mengatur ulang kata sandi Anda.</li>
+            </ul>
+
+            <h3>2. Panduan Pendaftaran (Registrasi)</h3>
+            <ul>
+                <li><strong>Membuat Akun Baru:</strong> Masukkan nama pengguna, email, dan kata sandi untuk membuat akun
+                    baru.</li>
+                <li><strong>Verifikasi Email:</strong> Pastikan Anda memeriksa email Anda untuk tautan verifikasi. Klik
+                    tautan untuk mengaktifkan akun Anda.</li>
+                <li><strong>Kesalahan Pendaftaran:</strong> Jika nama pengguna sudah digunakan, coba pilih nama pengguna
+                    lain atau pastikan email yang Anda masukkan benar.</li>
+            </ul>
+
+            <h3>3. Lupa Kata Sandi</h3>
+            <ul>
+                <li><strong>Mengatur Ulang Kata Sandi:</strong> Jika Anda lupa kata sandi, klik pada "Lupa Kata Sandi"
+                    di halaman login dan masukkan email untuk menerima instruksi reset kata sandi.</li>
+            </ul>
+
+            <div class="back-link">
+                <p>Kembali ke <a href="login.html">Halaman Login</a> atau <a href="register.html">Halaman
+                        Registrasi</a>.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ikon Bantuan -->
+    <div class="help-icon">
+        <a href="help.html" title="Bantuan">
+            <i class="fas fa-question-circle"></i>
+        </a>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peraturan Pajak - e-Pajak</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #2a7ae2, #c0e1f8);
+            color: #333;
+        }
+
+        /* Navbar */
+        .navbar {
+            width: 100%;
+            background-color: #2a7ae2;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+
+        /* Hamburger Icon */
+        .hamburger {
+            font-size: 28px;
+            color: white;
+            cursor: pointer;
+            display: none;
+        }
+
+        .navbar-logo h1 {
+            color: white;
+            font-size: 24px;
+        }
+
+        /* Navbar Links */
+        .navbar-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar-links li {
+            display: inline;
+        }
+
+        .navbar-links a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-links a:hover {
+            background-color: #1a5db8;
+        }
+
+        .navbar-links .active {
+            background-color: #1a5db8;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #2a7ae2;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            z-index: 1000;
+        }
+
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #1a5db8;
+        }
+
+        .sidebar .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 36px;
+            margin-left: 50px;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Konten Utama */
+        .content {
+            margin-top: 80px;
+            padding: 40px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        /* Grid Layout */
+        .peraturan-list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            /* 4 columns */
+            gap: 20px;
+            list-style: none;
+            padding: 0;
+        }
+
+        /* Item Peraturan */
+        .peraturan-item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .peraturan-title {
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #2a7ae2;
+            /* Blue background */
+            color: white;
+            /* White text color for contrast */
+            padding: 10px;
+            /* Add some padding around the title */
+            border-radius: 5px;
+            /* Optional: rounded corners */
+            margin-bottom: 10px;
+            /* Space between title and description */
+        }
+
+        .peraturan-description {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .peraturan-item a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .peraturan-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #333;
+            /* Warna latar belakang footer */
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 14px;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-left,
+        .footer-middle,
+        .footer-right {
+            flex: 1;
+        }
+
+        .footer-left p {
+            margin: 0;
+        }
+
+        .footer-middle ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        .footer-middle ul li {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        .footer-middle ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-middle ul li a:hover {
+            color: #2a7ae2;
+            /* Highlight when hover */
+        }
+
+        .footer-right .social-media {
+            text-align: right;
+        }
+
+        .footer-right .social-media a {
+            margin-left: 15px;
+            color: white;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+        .footer-right .social-media a:hover {
+            color: #2a7ae2;
+            /* Highlight when hover */
+        }
+
+        /* Responsiveness for mobile devices */
+        @media (max-width: 768px) {
+            .peraturan-list {
+                grid-template-columns: repeat(2, 1fr);
+                /* 2 columns for medium screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .peraturan-list {
+                grid-template-columns: 1fr;
+                /* 1 column for small screens */
+            }
+
+            /* Adjust padding and margins for peraturan items */
+            .peraturan-item {
+                padding: 15px;
+            }
+
+            .peraturan-title {
+                font-size: 16px;
+                /* Smaller font size for mobile */
+            }
+
+            .peraturan-description {
+                font-size: 14px;
+                /* Smaller font size for mobile */
+            }
+        }
+
+       /* Media Query untuk tampilan responsif */
+       @media (max-width: 768px) {
+            .navbar-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .sidebar {
+                display: block;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-middle ul {
+                margin-top: 15px;
+            }
+
+            .footer-right {
+                margin-top: 15px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <!-- Tombol Hamburger (untuk layar kecil) -->
+        <span class="hamburger" onclick="openSidebar()">&#9776;</span>
+
+        <!-- Logo e-Pajak -->
+        <div class="navbar-logo">
+            <h1>e-p<span style="color: #1a5db8;">aja</span>k</h1>
+        </div>
+
+        <!-- Link Navigasi (untuk layar besar) -->
+        <ul class="navbar-links">
+            <li><a href="dashboard.html">Beranda</a></li>
+            <li><a href="pajak-saya.html">Pajak Saya</a></li>
+            <li><a href="pembayaran-pajak.html">Pembayaran Pajak</a></li>
+            <li><a href="laporan-pajak.html">Laporan Pajak</a></li>
+            <li><a href="peraturan-pajak.html" class="active">Peraturan Pajak</a></li>
+            <li><a href="bantuan-pajak.html">Bantuan</a></li>
+            <li><a href="profil-page.html">Profil</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">&times;</a>
+        <a href="dashboard.html">Beranda</a>
+        <a href="pajak-saya.html">Pajak Saya</a>
+        <a href="pembayaran-pajak.html">Pembayaran Pajak</a>
+        <a href="laporan-pajak.html">Laporan Pajak</a>
+        <a href="peraturan-pajak.html" class="active">Peraturan Pajak</a>
+        <a href="bantuan-pajak.html">Bantuan</a>
+        <a href="profil-page.html">Profil</a>
+    </div>
+
+    <!-- Konten Peraturan Pajak -->
+    <div class="content">
+        <h1 class="section-title">Peraturan Pajak di Indonesia</h1>
+
+        <ul class="peraturan-list">
+            <!-- Peraturan Pajak 1 -->
+            <li class="peraturan-item">
+                <div class="peraturan-title">
+                    <a href="https://www.kemenkeu.go.id/en/regulation/peraturan-pajak-1/" target="_blank">
+                        Undang-Undang Pajak Penghasilan (PPh)
+                    </a>
+                </div>
+                <div class="peraturan-description">
+                    Undang-Undang yang mengatur tentang pajak penghasilan bagi individu dan badan usaha. Pajak ini
+                    dikenakan atas penghasilan yang diterima oleh wajib pajak dalam bentuk uang atau lainnya.
+                </div>
+            </li>
+
+            <!-- Peraturan Pajak 2 -->
+            <li class="peraturan-item">
+                <div class="peraturan-title">
+                    <a href="https://www.kemenkeu.go.id/en/regulation/peraturan-pajak-2/" target="_blank">
+                        Peraturan Pajak Pertambahan Nilai (PPN)
+                    </a>
+                </div>
+                <div class="peraturan-description">
+                    Pajak yang dikenakan atas setiap transaksi jual beli barang dan jasa. PPN bersifat konsumsi dan
+                    dikenakan pada saat barang atau jasa berpindah tangan.
+                </div>
+            </li>
+
+            <!-- Peraturan Pajak 3 -->
+            <li class="peraturan-item">
+                <div class="peraturan-title">
+                    <a href="https://www.kemenkeu.go.id/en/regulation/peraturan-pajak-3/" target="_blank">
+                        Undang-Undang Pajak Bumi dan Bangunan (PBB)
+                    </a>
+                </div>
+                <div class="peraturan-description">
+                    Peraturan yang mengatur tentang pajak yang dikenakan atas kepemilikan tanah dan bangunan. PBB
+                    merupakan pajak yang dibayar oleh pemilik objek pajak.
+                </div>
+            </li>
+
+            <!-- Peraturan Pajak 4 -->
+            <li class="peraturan-item">
+                <div class="peraturan-title">
+                    <a href="https://www.kemenkeu.go.id/en/regulation/peraturan-pajak-4/" target="_blank">
+                        Peraturan Pajak Bea Balik Nama Kendaraan Bermotor (BBNKB)
+                    </a>
+                </div>
+                <div class="peraturan-description">
+                    Peraturan yang mengatur tentang pajak yang dikenakan pada transaksi jual beli kendaraan bermotor.
+                    BBNKB harus dibayar oleh pembeli kendaraan pada saat balik nama.
+                </div>
+            </li>
+
+            <!-- Peraturan Pajak 5 -->
+            <li class="peraturan-item">
+                <div class="peraturan-title">
+                    <a href="https://www.kemenkeu.go.id/en/regulation/peraturan-pajak-5/" target="_blank">
+                        Undang-Undang Pajak Kendaraan Bermotor
+                    </a>
+                </div>
+                <div class="peraturan-description">
+                    Peraturan ini mengatur tentang kewajiban pajak tahunan yang dikenakan pada kendaraan bermotor yang
+                    terdaftar di Indonesia.
+                </div>
+            </li>
+
+        </ul>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-left">
+                <p>&copy; 2024 e-Pajak. All rights reserved.</p>
+            </div>
+            <div class="footer-middle">
+                <ul>
+                    <li><a href="privacy-policy.html">Kebijakan Privasi</a></li>
+                    <li><a href="terms.html">Syarat dan Ketentuan</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Kontak</a></li>
+                </ul>
+            </div>
+            <div class="footer-right">
+                <div class="social-media">
+                    <a href="https://facebook.com/epajak" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com/epajak" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com/company/epajak" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://instagram.com/epajak" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Fungsi untuk membuka sidebar
+        function openSidebar() {
+            document.getElementById("sidebar").style.width = "250px";
+        }
+
+        // Fungsi untuk menutup sidebar
+        function closeSidebar() {
+            document.getElementById("sidebar").style.width = "0";
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bantuan Pajak - e-Pajak</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #2a7ae2, #c0e1f8);
+            color: #333;
+        }
+
+        /* Navbar */
+        .navbar {
+            width: 100%;
+            background-color: #2a7ae2;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+
+        /* Hamburger Icon */
+        .hamburger {
+            font-size: 28px;
+            color: white;
+            cursor: pointer;
+            display: none;
+        }
+
+        .navbar-logo h1 {
+            color: white;
+            font-size: 24px;
+        }
+
+        /* Navbar Links */
+        .navbar-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar-links li {
+            display: inline;
+        }
+
+        .navbar-links a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-links a:hover {
+            background-color: #1a5db8;
+        }
+
+        .navbar-links .active {
+            background-color: #1a5db8;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #2a7ae2;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            z-index: 1000;
+        }
+
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #1a5db8;
+        }
+
+        .sidebar .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 36px;
+            margin-left: 50px;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Konten Utama */
+        .content {
+            margin-top: 80px;
+            padding: 40px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .help-text {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .faq {
+            margin-top: 30px;
+        }
+
+        .faq-item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-question {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .faq-answer {
+            font-size: 14px;
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+
+        /* Styling untuk bagian Hubungi Kami */
+        .contact-info {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-info ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .contact-info li {
+            display: flex;
+            margin: 10px;
+            align-items: center;
+            font-size: 16px;
+        }
+
+        .contact-info li i {
+            margin-right: 10px;
+            font-size: 20px;
+            color: #2a7ae2;
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #333;
+            /* Warna latar belakang footer */
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 14px;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-left,
+        .footer-middle,
+        .footer-right {
+            flex: 1;
+        }
+
+        .footer-left p {
+            margin: 0;
+        }
+
+        .footer-middle ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        .footer-middle ul li {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        .footer-middle ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-middle ul li a:hover {
+            color: #2a7ae2;
+            /* Highlight when hover */
+        }
+
+        .footer-right .social-media {
+            text-align: right;
+        }
+
+        .footer-right .social-media a {
+            margin-left: 15px;
+            color: white;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+        .footer-right .social-media a:hover {
+            color: #2a7ae2;
+            /* Highlight when hover */
+        }
+
+        /* Media Query untuk tampilan responsif */
+        @media (max-width: 768px) {
+            .navbar-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .sidebar {
+                display: block;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-middle ul {
+                margin-top: 15px;
+            }
+
+            .footer-right {
+                margin-top: 15px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <!-- Tombol Hamburger (untuk layar kecil) -->
+        <span class="hamburger" onclick="openSidebar()">&#9776;</span>
+
+        <!-- Logo e-Pajak -->
+        <div class="navbar-logo">
+            <h1>e-p<span style="color: #1a5db8;">aja</span>k</h1>
+        </div>
+
+        <!-- Link Navigasi (untuk layar besar) -->
+        <ul class="navbar-links">
+            <li><a href="dashboard.html">Beranda</a></li>
+            <li><a href="pajak-saya.html">Pajak Saya</a></li>
+            <li><a href="pembayaran-pajak.html">Pembayaran Pajak</a></li>
+            <li><a href="laporan-pajak.html">Laporan Pajak</a></li>
+            <li><a href="peraturan-pajak.html" >Peraturan Pajak</a></li>
+            <li><a href="bantuan-pajak.html" class="active">Bantuan</a></li>
+            <li><a href="profil-page.html">Profil</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">&times;</a>
+        <a href="dashboard.html">Beranda</a>
+        <a href="pajak-saya.html">Pajak Saya</a>
+        <a href="pembayaran-pajak.html">Pembayaran Pajak</a>
+        <a href="laporan-pajak.html">Laporan Pajak</a>
+        <a href="peraturan-pajak.html">Peraturan Pajak</a>
+        <a href="bantuan-pajak.html" class="active">Bantuan</a>
+        <a href="profil-page.html">Profil</a>
+    </div>
+
+    <!-- Konten Bantuan Pajak -->
+    <div class="content">
+        <h1 class="section-title">Bantuan Pajak</h1>
+
+        <p class="help-text">
+            Apakah Anda memiliki pertanyaan atau membutuhkan bantuan terkait pajak? Kami di e-Pajak siap membantu Anda! Di halaman ini, Anda akan menemukan informasi terkait layanan bantuan pajak, cara menghubungi kami, dan jawaban atas beberapa pertanyaan umum (FAQ).
+        </p>
+
+        <div class="faq">
+            <h2 class="section-subtitle">Pertanyaan Umum (FAQ)</h2>
+
+            <!-- FAQ 1 -->
+            <div class="faq-item">
+                <div class="faq-question">
+                    Apa itu Pajak Penghasilan (PPh)?
+                </div>
+                <div class="faq-answer">
+                    Pajak Penghasilan (PPh) adalah pajak yang dikenakan atas penghasilan yang diterima oleh individu atau badan usaha. Penghasilan ini dapat berupa gaji, keuntungan, atau pendapatan lainnya.
+                </div>
+            </div>
+
+            <!-- FAQ 2 -->
+            <div class="faq-item">
+                <div class="faq-question">
+                    Bagaimana cara membayar pajak melalui e-Pajak?
+                </div>
+                <div class="faq-answer">
+                    Anda dapat melakukan pembayaran pajak melalui berbagai metode, seperti transfer bank, kartu kredit, atau e-wallet. Pilih metode pembayaran yang sesuai pada halaman Pembayaran Pajak di situs e-Pajak.
+                </div>
+            </div>
+
+            <!-- FAQ 3 -->
+            <div class="faq-item">
+                <div class="faq-question">
+                    Di mana saya bisa mendapatkan formulir pajak?
+                </div>
+                <div class="faq-answer">
+                    Formulir pajak dapat diunduh langsung dari situs resmi Direktorat Jenderal Pajak atau dapat ditemukan di kantor pajak terdekat.
+                </div>
+            </div>
+
+            <!-- FAQ 4 -->
+            <div class="faq-item">
+                <div class="faq-question">
+                    Bagaimana jika saya tidak dapat membayar pajak tepat waktu?
+                </div>
+                <div class="faq-answer">
+                    Jika Anda tidak dapat membayar pajak tepat waktu, segera hubungi kantor pajak terdekat untuk meminta keringanan atau jadwal pembayaran cicilan. Denda akan dikenakan jika pembayaran dilakukan setelah tenggat waktu.
+                </div>
+            </div>
+
+            <!-- FAQ 5 -->
+            <div class="faq-item">
+                <div class="faq-question">
+                    Apakah ada bantuan atau konsultasi pajak gratis?
+                </div>
+                <div class="faq-answer">
+                    Ya, Direktorat Jenderal Pajak (DJP) menyediakan layanan konsultasi gratis untuk membantu wajib pajak. Anda bisa mengunjungi kantor pajak atau menghubungi kami melalui nomor telepon atau email yang tersedia.
+                </div>
+            </div>
+        </div>
+
+        <!-- Hubungi Kami -->
+        <h2 class="section-subtitle">Hubungi Kami</h2>
+        <p class="help-text">
+            Jika Anda membutuhkan bantuan lebih lanjut, Anda dapat menghubungi kami melalui berbagai saluran yang tersedia. Kami siap membantu Anda menyelesaikan masalah pajak dengan cara yang mudah dan cepat.
+        </p>
+
+        <!-- Info Kontak -->
+        <div class="contact-info">
+            <ul>
+                <li><i class="fas fa-envelope"></i><strong>Email:</strong> bantuan@epajak.com</li>
+                <li><i class="fas fa-phone-alt"></i><strong>Telepon:</strong> 0800-123-456</li>
+                <li><i class="fas fa-map-marker-alt"></i><strong>Alamat:</strong> Jalan Pajak No. 123, Jakarta, Indonesia</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-left">
+                <p>&copy; 2024 e-Pajak. All rights reserved.</p>
+            </div>
+            <div class="footer-middle">
+                <ul>
+                    <li><a href="privacy-policy.html">Kebijakan Privasi</a></li>
+                    <li><a href="terms.html">Syarat dan Ketentuan</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Kontak</a></li>
+                </ul>
+            </div>
+            <div class="footer-right">
+                <div class="social-media">
+                    <a href="https://facebook.com/epajak" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com/epajak" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com/company/epajak" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://instagram.com/epajak" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Fungsi untuk membuka sidebar
+        function openSidebar() {
+            document.getElementById("sidebar").style.width = "250px";
+        }
+
+        // Fungsi untuk menutup sidebar
+        function closeSidebar() {
+            document.getElementById("sidebar").style.width = "0";
+        }
+    </script>
+</body>
+
+</html>

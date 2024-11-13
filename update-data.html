@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perbarui Data Pajak - e-Pajak</title>
+    <!-- Menyertakan Font Awesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Gaya Global */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #2a7ae2, #c0e1f8);
+            color: white;
+        }
+
+        /* Navbar */
+        .navbar {
+            width: 100%;
+            background-color: #2a7ae2;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+
+        /* Hamburger Icon */
+        .hamburger {
+            font-size: 28px;
+            color: white;
+            cursor: pointer;
+            display: none;
+        }
+
+        .navbar-logo h1 {
+            color: white;
+            font-size: 24px;
+        }
+
+        /* Navbar Links */
+        .navbar-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar-links li {
+            display: inline;
+        }
+
+        .navbar-links a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-links a:hover {
+            background-color: #1a5db8;
+        }
+
+        .navbar-links .active {
+            background-color: #1a5db8;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #2a7ae2;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            z-index: 1000;
+        }
+
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #1a5db8;
+        }
+
+        .sidebar .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 36px;
+            margin-left: 50px;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Konten Utama */
+        .content {
+            margin-top: 80px;
+            padding: 40px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .form-group input[type="number"]:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #2a7ae2;
+        }
+
+        .button {
+            background-color: #2a7ae2;
+            color: white;
+            padding: 12px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+            border: none;
+        }
+
+        .button:hover {
+            background-color: #1a5db8;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .sidebar {
+                display: block;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-middle ul {
+                margin-top: 15px;
+            }
+
+            .footer-right {
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <!-- Tombol Hamburger (untuk layar kecil) -->
+        <span class="hamburger" onclick="openSidebar()">&#9776;</span>
+
+        <!-- Logo e-Pajak -->
+        <div class="navbar-logo">
+            <h1>e-p<span style="color: #1a5db8;">aja</span>k</h1>
+        </div>
+
+        <!-- Link Navigasi (untuk layar besar) -->
+        <ul class="navbar-links">
+            <li><a href="dashboard.html">Beranda</a></li>
+            <li><a href="pajak-saya.html">Pajak Saya</a></li>
+            <li><a href="pembayaran-pajak.html">Pembayaran Pajak</a></li>
+            <li><a href="laporan-pajak.html">Laporan Pajak</a></li>
+            <li><a href="peraturan-pajak.html">Peraturan Pajak</a></li>
+            <li><a href="bantuan-pajak.html">Bantuan</a></li>
+            <li><a href="profil-page.html" class="active">Profil</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">&times;</a>
+        <a href="dashboard.html">Beranda</a>
+        <a href="pajak-saya.html">Pajak Saya</a>
+        <a href="pembayaran-pajak.html">Pembayaran Pajak</a>
+        <a href="laporan-pajak.html">Laporan Pajak</a>
+        <a href="peraturan-pajak.html">Peraturan Pajak</a>
+        <a href="bantuan-pajak.html">Bantuan</a>
+        <a href="profil-page.html" class="active">Profil</a>
+    </div>
+
+    <!-- Form Perbarui Data Pajak -->
+    <div class="content">
+        <h1 class="section-title">Perbarui Data Pajak Anda</h1>
+
+        <form action="#" method="POST">
+            <!-- Nama Lengkap -->
+            <div class="form-group">
+                <label for="nama-lengkap">Nama Lengkap:</label>
+                <input type="text" id="nama-lengkap" name="nama_lengkap" placeholder="Masukkan nama lengkap" required>
+            </div>
+
+            <!-- Nomor Identitas -->
+            <div class="form-group">
+                <label for="nomor-identitas">Nomor Identitas (KTP / NPWP):</label>
+                <input type="text" id="nomor-identitas" name="nomor_identitas" placeholder="Masukkan nomor identitas" required>
+            </div>
+
+            <!-- Alamat -->
+            <div class="form-group">
+                <label for="alamat">Alamat:</label>
+                <textarea id="alamat" name="alamat" rows="4" placeholder="Masukkan alamat lengkap" required></textarea>
+            </div>
+
+            <!-- Nomor Telepon -->
+            <div class="form-group">
+                <label for="nomor-telepon">Nomor Telepon:</label>
+                <input type="text" id="nomor-telepon" name="nomor_telepon" placeholder="Masukkan nomor telepon" required>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Masukkan email" required>
+            </div>
+
+            <!-- Tombol Perbarui Data -->
+            <div class="form-group">
+                <button type="submit" class="button">Perbarui Data</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 e-Pajak. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Fungsi untuk membuka sidebar
+        function openSidebar() {
+            document.getElementById("sidebar").style.width = "250px";
+        }
+
+        // Fungsi untuk menutup sidebar
+        function closeSidebar() {
+            document.getElementById("sidebar").style.width = "0";
+        }
+    </script>
+</body>
+
+</html>

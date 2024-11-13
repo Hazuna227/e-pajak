@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>e-pajak - Halaman Utama</title>
+    <style>
+        /* Mengatur keseluruhan halaman */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #2a7ae2, #6fa3f8);
+            font-family: Arial, sans-serif;
+        }
+
+        /* Container Utama */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Logo */
+        .logo h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .logo h1 span {
+            color: #2a7ae2;
+        }
+
+        /* Tombol Masuk */
+        .cta {
+            margin-top: 20px;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #2a7ae2;
+            color: #fff;
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #1b5ca4;
+        }
+    </style>
+</head>
+<body>
+    <!-- Halaman Utama -->
+    <div class="container">
+        <!-- Logo -->
+        <div class="logo">
+            <h1>e-p<span style="color:#2a7ae2;">aja</span>k</h1>
+        </div>
+        
+        <!-- Tombol Masuk -->
+        <div class="cta">
+            <a href="login.html" class="cta-button">
+                <span>&#8594;</span>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
